@@ -220,3 +220,44 @@ release is uploaded, and every accepted result below was produced with
   the owner approved the revision and the package was published; see
   "Published" above. Still genuinely open: the byte-level clean install of
   `requirements-lock.txt` (conditional, unchanged) and all of PR-M2/PR-M3.
+
+### GitHub source repository published (same day, owner-confirmed)
+
+- A clean public source repo was created at
+  [`kialajin-l/cognitive-learning-lab`](https://github.com/kialajin-l/cognitive-learning-lab)
+  with **entirely fresh git history** — initial commit `34231b87…` (44 files,
+  the confirmed export set); the workspace branch was never pushed.
+- Before the first public commit: secret/machine-path scans over the export
+  set (zero real hits), staging byte-diffed against the source tree, and
+  `PAPER-ARTIFACT-NOTE.md` corrected (`Public URL: pending` → the published
+  HF URL; superseded hashes `0c700b2f…`/`f46de08c…` → current
+  `64e02c1a…`/`d69ad3ce…`; the same relabelling applied in
+  `acceptance/PR-M1.md`).
+- **Release v0.1.0** carries the wheel (`64e02c1a…`), the sdist
+  (`d69ad3ce…`) and `SHA256SUMS` as attachments — artifacts are not in the
+  git history.
+- Post-clone verification found `SOURCE-INVENTORY.md` absent from the
+  confirmed list while hashed by `SHA256SUMS` and referenced by six shipped
+  documents; owner decision: add it (already public on HF) — commit
+  `d6dc1b4…`.
+- Post-upload verification, measured: fresh clone verifies 43/43 non-`dist`
+  SHA256SUMS entries; Release assets re-downloaded hash-match the built
+  `dist/` byte-for-byte; a fresh venv installed the Release-downloaded wheel
+  (`doctor` rc=0, `infer` rc=0 `answered`/`verified_judgment`, second process
+  `acquisition_calls=0`) and the 28-test suite from the cloned `tests/`
+  passes against that install.
+- The model-package channel remains Hugging Face; no weights on GitHub.
+
+### ModelScope mirror (same day, owner-approved)
+
+- Public mirror repo created at
+  [`kialajin/cognitive-learning-lab`](https://modelscope.cn/models/kialajin/cognitive-learning-lab)
+  (token validated via SDK `whoami`, account `kialajin`).
+- 14 files uploaded **byte-identical** to the HF repo (thin package, no
+  weights, wheel via LFS) — commit `d0aaacbffe…`.
+- Download-back verification: 10/10 flat-layout doc entries match
+  byte-for-byte; wheel/sdist hashes match the current build
+  (`64e02c1a…`/`d69ad3ce…`). The unmatched `SHA256SUMS` lines are the flat
+  working-tree layout, not missing content.
+- Channels: Hugging Face primary, ModelScope mirror, GitHub source copy;
+  all three carry the same artifact identity.

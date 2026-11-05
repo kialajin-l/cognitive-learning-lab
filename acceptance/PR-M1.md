@@ -502,3 +502,62 @@ downloaded-back wheel: `doctor` rc=0, `infer` rc=0
 rc=0 with memory reuse. The first uploaded build's receipt (commit
 `4225068d`, wheel `803ee824…`) remains valid as history; the remote now
 serves the fix-up build.
+
+### GitHub source-repository export (owner-confirmed, 2026-11-05)
+
+A clean public source repository was published with entirely fresh git
+history — the workspace branch was **not** pushed anywhere. Destination
+`https://github.com/kialajin-l/cognitive-learning-lab` (org `kialajin-l`,
+created via `gh` and pushed through the local proxy, which GitHub writes
+require).
+
+Pre-upload gates: a secret/credential scan and a machine-path scan over the
+whole export set gave **zero real hits** (the only pattern matches were the
+`s:/` substring inside `https://` URLs). The 13-item confirmed export
+(`src/`, `tests/`, `pyproject.toml`, `LICENSE`, `README.md`, `MODEL_CARD.md`,
+`THIRD_PARTY_NOTICES.md`, `requirements-lock.txt`, `acceptance/PR-M1.md`,
+`PAPER-ARTIFACT-NOTE.md`, `CHANGELOG.md`, `RELEASE-MANIFEST.json`,
+`SHA256SUMS`) was byte-diffed against the source tree before committing —
+all identical; no `__pycache__`/`egg-info` copied. Wheel, sdist and
+`SHA256SUMS` are **Release v0.1.0 attachments, not git blobs**.
+
+One gap was found in post-clone verification and closed by owner decision:
+`SOURCE-INVENTORY.md` was absent from the confirmed list while being hashed
+by `SHA256SUMS` and referenced by six shipped documents (13 references) —
+and already public on the Hugging Face repo. It was added as commit
+`d6dc1b4…`.
+
+Post-upload verification, all measured:
+
+- fresh clone (`core.autocrlf=input`): **43/43** non-`dist` `SHA256SUMS`
+  entries match; the two `dist/` entries are the Release attachments;
+- Release assets re-downloaded: wheel `64e02c1a…` 46,448 B and sdist
+  `d69ad3ce…` 51,237 B hash-match the built `dist/` byte-for-byte, and the
+  `SHA256SUMS` asset is identical to the repository copy;
+- fresh uv venv installed the **Release-downloaded** wheel: `doctor` rc=0
+  `blockers:[]`, `infer` rc=0 `answered`/`mock`/`verified_judgment`, a second
+  independent process rc=0 with `acquisition_calls=0` (memory replayed),
+  and the 28-test suite run from the cloned `tests/` against the installed
+  wheel: **28 passed**.
+
+### ModelScope mirror (owner-approved, same day)
+
+Channel matrix note: ModelScope is domestic and runs **direct, no proxy**; the
+token (`ms-…`, short-lived, write role) validated via the SDK's `whoami`
+(account `kialajin`).
+
+- Repo created public: `https://modelscope.cn/models/kialajin/cognitive-learning-lab`.
+- Upload: 14 files **byte-identical** to the HF repo at HEAD `d0756e93…`
+  (10 hash-surface docs incl. `acceptance/PR-M1.md`, manifest, SHA256SUMS,
+  `pyproject.toml`, `requirements-lock.txt`, wheel, sdist) — upload commit
+  `d0aaacbffe…`, 14 committed / 0 failed, wheel stored via LFS.
+- Download-back (`snapshot_download@master`): every `SHA256SUMS` entry whose
+  path exists in the flat remote layout matches byte-for-byte (10/10);
+  wheel/sdist hashes match the current build directly
+  (`64e02c1a…` / `d69ad3ce…`). The 35 "missing" entries are the flat-`src/` /
+  `dist/` layout difference of `SHA256SUMS`, the same structural note as on
+  HF, not a defect — artifact integrity is verified through the artifacts
+  themselves.
+- README's YAML frontmatter (HF card format) is shipped unchanged to keep the
+  two channels byte-identical; ModelScope tolerates it. Model channel
+  status: HF primary, ModelScope mirror; no weights on either.
