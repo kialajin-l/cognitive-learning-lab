@@ -1,0 +1,15 @@
+{
+  "run_id": "example-cold-acquire",
+  "task_id": "widget-alpha-owner",
+  "question": "Which team is widget-alpha assigned to?",
+  "entity": "widget-alpha",
+  "candidates": [
+    { "candidate_id": "c1", "text": "team-north" },
+    { "candidate_id": "c2", "text": "team-south" }
+  ],
+  "constraints": ["exactly one owning team"],
+  "acquire": {
+    "source_refs": ["dir-001"],
+    "source": "local-source-fixture"
+  }
+}

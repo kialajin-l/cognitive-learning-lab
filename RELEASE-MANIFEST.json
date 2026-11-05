@@ -1,0 +1,135 @@
+{
+  "acceptance": {
+    "items_conditional": [
+      "clean-environment reproduction of requirements-lock.txt: the 44-package closure resolves as a set in a fresh venv (exit 0), but wheels were not re-downloaded and no package hashes are pinned; re-measure on a from-scratch model-extra install",
+      "the real-model smoke is one receipt on one synthetic example on one machine (offline, CPU); it is not an accuracy evaluation"
+    ],
+    "items_not_run": [],
+    "items_passed": [
+      "install from build artifacts outside the repository",
+      "acquire -> verify -> promote -> judge -> answer -> writeback, reused by a second process",
+      "missing evidence / conflict / tampering / forged verified produce no unauthorised writeback",
+      "raw proposal, judgment and verification kept as separate layers",
+      "explicit store required; clear limited to the named store; no background work",
+      "release documents present",
+      "console script and python -m run natively in a real venv; wheel and sdist each install outside the repository and the 27-test suite passes against the installed package",
+      "real frozen-model smoke: offline CPU infer with the pinned local snapshot (provider_class=real, answered, memory reused by a second process); encoder weights measured unused at laya 0.3.20 inference"
+    ],
+    "report": "acceptance/PR-M1.md",
+    "status": "LOCAL_ACCEPTED_REAL_MODEL_SMOKE",
+    "tests": {
+      "command": "python -m pytest tests -q --basetemp=<tmp> -p no:cacheprovider",
+      "failed": 0,
+      "passed": 28,
+      "re_run_against_installed_wheel": "same command in a clean venv with cognitive_runtime resolved from site-packages: 28 passed, rc=0"
+    }
+  },
+  "artifact_name": "cognitive-runtime",
+  "artifacts": {
+    "sdist": {
+      "bytes": 51237,
+      "note": "instance fingerprint of this build; reproducible-build claim not made",
+      "path": "dist/cognitive_runtime-0.1.0.tar.gz",
+      "sha256": "d69ad3ce98d3a63fdf2519724675f599920b4173cf3a4a381bee00b6fc9b0213"
+    },
+    "wheel": {
+      "bytes": 46448,
+      "path": "dist/cognitive_runtime-0.1.0-py3-none-any.whl",
+      "sha256": "64e02c1ab36023f4ae66c6da0d0ba6fba959bd88664d6b37590b3905c71f28e1"
+    }
+  },
+  "build_time_utc": "2026-11-05T11:36:00+00:00",
+  "checksum_note": "SHA256SUMS and this manifest deliberately do not hash each other or themselves",
+  "checksum_scope_note": "SHA256SUMS lists the 10 release documents, the 33 src/tests files and the 2 build artifacts. Generated build residue (src/cognitive_runtime.egg-info/, __pycache__) is excluded: it is not shipped and a rebuild does not reproduce it byte-for-byte, so hashing it made the checksum file unverifiable elsewhere.",
+  "checksums_file": "SHA256SUMS",
+  "dependencies": {
+    "dev_extra": [
+      "pytest==9.1.1"
+    ],
+    "lock_file": "requirements-lock.txt",
+    "lock_package_count": 44,
+    "lock_provenance": "full 44-package closure read from installed distributions on the audit machine (importlib.metadata); resolves satisfiable as a set in a fresh venv via uv pip install --dry-run (exit 0), but not resolver output, no package hashes, wheels not re-downloaded",
+    "python": ">=3.10 (accepted on 3.11.9)",
+    "runtime_optional_extra_model": [
+      "laya==0.3.20",
+      "huggingface_hub==1.33.0",
+      "torch==2.14.0"
+    ],
+    "validate_extra": [
+      "jsonschema==4.26.0"
+    ]
+  },
+  "excluded_from_bundle": [
+    "planning/handoff/ledger documents (stay in the source repository)",
+    "dist/, build/, *.egg-info/, __pycache__, .pytest_cache",
+    "local stores and any model weights",
+    "historical experiment traces, task sets and answer keys",
+    "machine absolute paths"
+  ],
+  "license": {
+    "code": "Apache-2.0 — owner decision recorded 2026-11-05 (TASK-LEDGER PR-M1-R5); covers this package's code only, does not re-license the upstream weights",
+    "license_file_present": true,
+    "license_file_sha256": "d55f3052cc51ef8bb0fb0161b55f98d93cb7542c1c6b19e1ebf5655a8c1408a1",
+    "upstream_weights": "apache-2.0 at the pinned revisions (see SOURCE-INVENTORY.md)"
+  },
+  "milestone": "PR-M1",
+  "publication": {
+    "blocked_on": [],
+    "decisions": "destination repo id and publication revision approved by the owner on 2026-11-05",
+    "destination": "huggingface.co/WayneRR/cognitive-learning-lab (model repo)",
+    "post_download_verification": "performed twice, once per uploaded build. (1) Build 803ee824 (wheel) / 37375e94 (sdist), upload commit 4225068d: re-downloaded via hf-mirror, hashes matched byte-for-byte, fresh venv smoke passed. (2) Current build 64e02c1a (wheel) / d69ad3ce (sdist), upload commit 5ccf3666 (card fix-up: stale NOT_UPLOADED badge removed, YAML frontmatter added): re-downloaded via hf-mirror, hashes 64e02c1ab36023f4ae66c6da0d0ba6fba959bd88664d6b37590b3905c71f28e1 / d69ad3ce98d3a63fdf2519724675f599920b4173cf3a4a381bee00b6fc9b0213 match byte-for-byte, fresh uv venv installed the downloaded-back wheel: doctor rc=0, infer rc=0 answered/mock/verified_judgment, second-process replay rc=0 answered with memory reuse. The file CDN behind huggingface.co times out on this network, so downloads go through hf-mirror; hashes are endpoint-independent.",
+    "publication_revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+    "remote_commit": "4225068d5f589f1bea843cce313475ce197c3b79",
+    "remote_commit_url": "https://huggingface.co/WayneRR/cognitive-learning-lab/commit/4225068d5f589f1bea843cce313475ce197c3b79",
+    "status": "PUBLISHED",
+    "uploaded": true,
+    "uploaded_at_utc": "2026-11-05T09:20:00+00:00 (approx; single upload_folder commit)"
+  },
+  "release_bundle_files_sha256": {
+    "CHANGELOG.md": "fbf19fa6b43d678f3a9280981a63c3e5aa32c1570b52f04923284c6c34b8ae71",
+    "LICENSE": "d55f3052cc51ef8bb0fb0161b55f98d93cb7542c1c6b19e1ebf5655a8c1408a1",
+    "MODEL_CARD.md": "50093c10d4c51f9cfa96d6bad44a3c9d3377ca96dc073d5e37fe5d2ba0d284e1",
+    "PAPER-ARTIFACT-NOTE.md": "cd1bb4048ccf3917080d37791dfd1064707e4dbb0db032500875f480e1e0b6e4",
+    "README.md": "e60359ccd37cb59f7e29b5c61607af945bb161ebe25670c8f666e790c6a9ffe2",
+    "SOURCE-INVENTORY.md": "9da97103cbd853534c6e5d9f866bc1608330c213ffad76d7d6d2ef6317edee82",
+    "THIRD_PARTY_NOTICES.md": "4d4222fba571ec4621f22c6a199925375fbb3d43bbec774a8f800bea7417dbc4",
+    "acceptance/PR-M1.md": "a747fcf5d9ba5c92f38f9eeb0b22172625a3ce261498c1c2d8084a450bc1755b",
+    "pyproject.toml": "bdedce510fda22aed93b9035cba67afa6f939785e4f78eab8b799f2109db0b4b",
+    "requirements-lock.txt": "adb192fbfd6a98c79c5e59bb7345c8e2db66183d6494d25dd233b1bbcc8ad1f6"
+  },
+  "source_identity": {
+    "branch": "public-runtime-m1",
+    "documents_committed_note": "commit ids for the release-document batches live in TASK-LEDGER.zh-CN.md, not here: a manifest cannot name its own commit and stay accurate. What is asserted instead is the check itself — wheel members, sdist sources, every SHA256SUMS entry, the bundle-file hashes and the source-tree digest were re-compared byte-for-byte against this working tree immediately before the commit, with zero mismatches",
+    "head_commit_at_build": "3cd91425",
+    "repository": "DistributedLLM-Cognitive-Learning-Lab (private working repository; not a public URL)",
+    "source_file_count": 33,
+    "source_tree_sha256": "452b2c234f5564f38dd3388b7d01abd3ee7b50d4983ff6378668c7746346c9d2",
+    "working_tree": "dirty at build time — documents were added after that commit; bound to file hashes below, not to HEAD alone"
+  },
+  "upstream_model": {
+    "encoder_dependency": {
+      "files": {
+        "model.safetensors": {
+          "bytes": 1583544840,
+          "sha256": "44510fec5d3a81a1877f225637b869495f18e55f6f23a09abb9be0acc030295f"
+        }
+      },
+      "license": "apache-2.0",
+      "present_in_audit_environment": false,
+      "repo_id": "answerdotai/ModernBERT-large",
+      "revision": "45bb4654a4d5aaff24dd11d4781fa46d39bf8c13"
+    },
+    "files": {
+      "model.safetensors": {
+        "bytes": 842609210,
+        "sha256": "891102d372688fc2a094dac56a384bc537b87c63f21f9f3dac0be2b7cbc8d86c"
+      }
+    },
+    "identity_status": "candidate source, not an approved publication revision",
+    "license_at_revision": "apache-2.0",
+    "repo_id": "convaiinnovations/laya",
+    "revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+    "weights_bundled": false
+  },
+  "version": "0.1.0"
+}

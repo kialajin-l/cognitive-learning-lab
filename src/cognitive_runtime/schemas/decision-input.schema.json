@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/cognitive-runtime/decision-input/v1",
+  "title": "Cognitive Runtime DecisionInput",
+  "description": "Typed input for one proposal request. Answer-side and self-asserted trust keys are refused before validation; this schema does not carry them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "question", "entity", "candidates"],
+  "properties": {
+    "schema_version": {"const": "cognitive-runtime/decision-input/v1"},
+    "run_id": {"type": "string", "minLength": 1},
+    "task_id": {"type": "string"},
+    "question": {"type": "string", "minLength": 1},
+    "entity": {"type": "string", "minLength": 1},
+    "candidates": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["candidate_id", "text"],
+        "properties": {
+          "candidate_id": {"type": "string", "minLength": 1},
+          "text": {"type": "string"}
+        }
+      }
+    },
+    "candidate_set_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "constraints": {"type": "array", "items": {"type": "string"}},
+    "memory_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["fact_id", "content", "source", "source_ref", "content_sha256"],
+        "properties": {
+          "fact_id": {"type": "string", "minLength": 1},
+          "support": {"type": ["number", "null"]},
+          "content": {"type": "string", "maxLength": 2000},
+          "source": {"type": "string"},
+          "source_ref": {"type": "string"},
+          "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "memory_snapshot_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

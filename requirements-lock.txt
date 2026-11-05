@@ -1,0 +1,70 @@
+# PR-M1 dependency lock — measured environment closure, not resolver output.
+#
+# Every version below was read from an installed distribution in the acceptance
+# environment (Windows 10, CPython 3.11.9, x86_64, `importlib.metadata.version`),
+# so this file describes the environment the mock chain was actually accepted on.
+# It is the full transitive closure: 44 packages, verified satisfiable together
+# in a clean venv (`uv pip install --dry-run -r requirements-lock.txt` -> 44
+# packages, exit 0). No hashes are recorded, so integrity relies on the index.
+#
+# `pyproject.toml` pins only laya, huggingface_hub and jsonschema; resolving from
+# it alone drifts upward (torch 2.15.0, transformers 5.22.1, numpy 2.4.6,
+# pytest 9.2.0 measured on 2026-11-05). Use this file, not pyproject, as the
+# reproducibility surface, and re-measure it whenever the real-model smoke runs.
+#
+# Isolation mechanism used for acceptance: the audit interpreter is an embedded
+# build (it ships `python311._pth`, so it runs isolated and has no `venv` or
+# `virtualenv` module). `uv venv` creates a normal, non-isolated venv from it,
+# which is what the install and console-script checks below were run in.
+
+# runtime — direct (optional extra: model)
+laya==0.3.20
+huggingface_hub==1.33.0
+
+# runtime — transitive, required by the real model path
+torch==2.14.0
+transformers==5.17.0
+safetensors==0.8.0
+numpy==2.4.1
+tokenizers==0.23.2
+regex==2026.9.10
+click==8.5.0
+filelock==4.0.3
+fsspec==2026.9.0
+hf-xet==1.6.0
+httpx==0.28.1
+httpcore==1.0.9
+h11==0.16.0
+anyio==4.12.1
+idna==3.20
+certifi==2026.1.4
+packaging==26.0
+pyyaml==6.0.3
+tqdm==4.67.1
+typing-extensions==4.15.0
+mpmath==1.3.0
+sympy==1.14.0
+networkx==3.6.1
+jinja2==3.1.6
+markupsafe==3.0.3
+setuptools==80.10.2
+rich==14.3.1
+markdown-it-py==4.0.0
+mdurl==0.1.2
+pygments==2.19.2
+shellingham==1.5.4
+typer==0.21.1
+annotated-doc==0.0.4
+colorama==0.4.6
+
+# validation (optional extra: validate)
+jsonschema==4.26.0
+attrs==25.4.0
+referencing==0.36.2
+rpds-py==0.30.0
+jsonschema-specifications==2025.9.1
+
+# development only, never required at runtime
+pytest==9.1.1
+iniconfig==2.3.0
+pluggy==1.6.0

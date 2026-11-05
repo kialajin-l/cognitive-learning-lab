@@ -1,0 +1,15 @@
+{
+  "run_id": "example-conflict",
+  "task_id": "widget-alpha-conflicting",
+  "question": "Which team is widget-alpha assigned to?",
+  "entity": "widget-alpha",
+  "candidates": [
+    { "candidate_id": "c1", "text": "team-north" },
+    { "candidate_id": "c2", "text": "team-south" }
+  ],
+  "acquire": {
+    "source_refs": ["dir-001", "dir-003"],
+    "source": "local-source-fixture"
+  },
+  "note": "abstain with conflicting_verified_rules and no writeback; two receipts that disagree are not averaged or resolved by confidence"
+}

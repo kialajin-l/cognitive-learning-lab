@@ -1,0 +1,37 @@
+[build-system]
+# setuptools>=77 is required because `license` below is a PEP 639 SPDX
+# expression; older setuptools expects a table and rejects this file.
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cognitive-runtime"
+version = "0.1.0"
+description = "Frozen proposal model plus external memory, typed judgment, verification and controlled writeback."
+readme = "README.md"
+requires-python = ">=3.10"
+# Owner decision recorded 2026-11-05 (TASK-LEDGER PR-M1-R5): the runtime code
+# this package ships is Apache-2.0. Upstream model weights keep their own
+# licence and are not re-licensed here — see THIRD_PARTY_NOTICES.md.
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+classifiers = ["Programming Language :: Python :: 3.11"]
+
+dependencies = []
+
+[project.optional-dependencies]
+model = ["laya==0.3.20", "huggingface_hub==1.33.0"]
+validate = ["jsonschema==4.26.0"]
+dev = ["pytest>=8", "jsonschema==4.26.0"]
+
+[project.scripts]
+cognitive-runtime = "cognitive_runtime.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+cognitive_runtime = ["schemas/*.json", "defaults/*.json", "defaults/examples/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

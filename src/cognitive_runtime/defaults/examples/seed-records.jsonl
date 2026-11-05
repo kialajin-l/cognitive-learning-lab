@@ -1,0 +1,2 @@
+{"entity": "widget-beta", "content": "Directory record: widget-beta is assigned to team-south.", "source": "local-source-fixture", "source_ref": "dir-002"}
+{"entity": "widget-gamma", "content": "Directory record: widget-gamma is assigned to team-east.", "source": "local-source-fixture", "source_ref": "dir-999", "note": "dir-999 has no receipt: verify must fail and this record must never authorise an answer"}
